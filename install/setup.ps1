@@ -1,27 +1,153 @@
+param(
+    [ValidateSet('1', '2', '3')]
+    [string]$Level,
+
+    [ValidateSet('Project', 'Global')]
+    [string]$Scope
+)
+
 $ErrorActionPreference = 'Stop'
-$target = Join-Path (Get-Location) '.ai-learning-os'
+
+if (-not $Level) {
+    Write-Host 'Choose an AI Learning OS setup level.'
+    Write-Host '1. Core'
+    Write-Host '2. Core + Learning (recommended)'
+    Write-Host '3. Full templates'
+    $Level = Read-Host 'Level (1-3)'
+    if ($Level -notin @('1', '2', '3')) { throw 'Enter 1, 2, or 3.' }
+}
+
+if (-not $Scope) {
+    Write-Host 'Choose where to apply the rules.'
+    Write-Host '1. Current project (safer default)'
+    Write-Host '2. Global Codex settings'
+    $scopeChoice = Read-Host 'Scope (1-2)'
+    if ($scopeChoice -eq '1') { $Scope = 'Project' }
+    elseif ($scopeChoice -eq '2') { $Scope = 'Global' }
+    else { throw 'Enter 1 or 2.' }
+}
+
+$sourceRoot = Split-Path -Parent $PSScriptRoot
+$timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+
+if ($Scope -eq 'Global') {
+    $codexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $env:USERPROFILE '.codex' }
+    $target = Join-Path $codexHome 'ai-learning-os'
+    $agentsPath = Join-Path $codexHome 'AGENTS.md'
+    $referenceRoot = 'ai-learning-os'
+}
+else {
+    $target = Join-Path (Get-Location) '.ai-learning-os'
+    $agentsPath = Join-Path (Get-Location) 'AGENTS.md'
+    $referenceRoot = '.ai-learning-os'
+}
 
 if (Test-Path -LiteralPath $target) {
     throw "The target already exists: $target. Setup stopped to protect the existing configuration."
 }
 
-Write-Host 'Choose an AI Learning OS setup level.'
-Write-Host '1. Core'
-Write-Host '2. Core + Learning (recommended)'
-Write-Host '3. Full'
-$choice = Read-Host 'Choice (1-3)'
-if ($choice -notin @('1','2','3')) { throw 'Enter 1, 2, or 3.' }
+$beginMarker = '<!-- AI-LEARNING-OS:BEGIN -->'
+$endMarker = '<!-- AI-LEARNING-OS:END -->'
+$existingAgents = if (Test-Path -LiteralPath $agentsPath) { Get-Content -Raw -LiteralPath $agentsPath } else { '' }
 
-$root = Split-Path -Parent $PSScriptRoot
-New-Item -ItemType Directory -Path $target | Out-Null
-Copy-Item -Recurse -LiteralPath (Join-Path $root 'core') -Destination $target
-
-if ($choice -in @('2','3')) {
-    Copy-Item -Recurse -LiteralPath (Join-Path $root 'learning') -Destination $target
-}
-if ($choice -eq '3') {
-    Copy-Item -Recurse -LiteralPath (Join-Path $root 'work') -Destination $target
+if ($existingAgents -match [regex]::Escape($beginMarker)) {
+    throw "AI Learning OS is already linked in $agentsPath. Setup stopped to avoid duplicate instructions."
 }
 
-@("level=$choice", "installed=$(Get-Date -Format o)") | Set-Content -LiteralPath (Join-Path $target 'install.info') -Encoding utf8
-Write-Host "Setup complete: $target"
+$coreLinks = @(
+    "$referenceRoot/core/identity.md",
+    "$referenceRoot/core/thinking.md",
+    "$referenceRoot/core/knowledge.md",
+    "$referenceRoot/core/response.md",
+    "$referenceRoot/core/style.md",
+    "$referenceRoot/core/orchestrator.md"
+)
+
+$lines = @(
+    $beginMarker,
+    '# AI Learning OS',
+    '',
+    "Apply AI Learning OS level $Level from ``$referenceRoot``.",
+    '',
+    'Read and always apply these Core rules:'
+)
+$lines += $coreLinks | ForEach-Object { "- ``$_``" }
+
+if ($Level -in @('2', '3')) {
+    $lines += @(
+        '',
+        'Use these Learning Coaches when relevant without delaying simple requests:'
+    )
+    $lines += @(
+        "$referenceRoot/learning/question-coach.md",
+        "$referenceRoot/learning/thinking-coach.md",
+        "$referenceRoot/learning/context-coach.md",
+        "$referenceRoot/learning/learning-coach.md"
+    ) | ForEach-Object { "- ``$_``" }
+}
+
+if ($Level -eq '3') {
+    $lines += @(
+        '',
+        'The Work files are reusable templates. Load one only when the current task needs it:',
+        "- ``$referenceRoot/work/project-template.md``",
+        "- ``$referenceRoot/work/workflow-template.md``",
+        "- ``$referenceRoot/work/role-template.md``",
+        '',
+        'Keep real project facts, decisions, constraints, Evidence, and Reference in each project rather than in the global templates.'
+    )
+}
+
+$lines += $endMarker
+$instructionBlock = $lines -join [Environment]::NewLine
+
+$createdTarget = $false
+try {
+    $targetParent = Split-Path -Parent $target
+    if (-not (Test-Path -LiteralPath $targetParent)) {
+        New-Item -ItemType Directory -Path $targetParent -Force | Out-Null
+    }
+
+    New-Item -ItemType Directory -Path $target | Out-Null
+    $createdTarget = $true
+    Copy-Item -Recurse -LiteralPath (Join-Path $sourceRoot 'core') -Destination $target
+
+    if ($Level -in @('2', '3')) {
+        Copy-Item -Recurse -LiteralPath (Join-Path $sourceRoot 'learning') -Destination $target
+    }
+    if ($Level -eq '3') {
+        Copy-Item -Recurse -LiteralPath (Join-Path $sourceRoot 'work') -Destination $target
+    }
+
+    @(
+        "level=$Level",
+        "scope=$Scope",
+        "installed=$(Get-Date -Format o)"
+    ) | Set-Content -LiteralPath (Join-Path $target 'install.info') -Encoding utf8
+
+    $agentsParent = Split-Path -Parent $agentsPath
+    if (-not (Test-Path -LiteralPath $agentsParent)) {
+        New-Item -ItemType Directory -Path $agentsParent -Force | Out-Null
+    }
+
+    if (Test-Path -LiteralPath $agentsPath) {
+        $backupPath = "$agentsPath.backup-$timestamp"
+        Copy-Item -LiteralPath $agentsPath -Destination $backupPath
+        $newAgents = $existingAgents.TrimEnd() + [Environment]::NewLine + [Environment]::NewLine + $instructionBlock + [Environment]::NewLine
+        Set-Content -LiteralPath $agentsPath -Value $newAgents -Encoding utf8
+        Write-Host "Existing AGENTS.md backed up to: $backupPath"
+    }
+    else {
+        Set-Content -LiteralPath $agentsPath -Value ($instructionBlock + [Environment]::NewLine) -Encoding utf8
+    }
+}
+catch {
+    if ($createdTarget -and (Test-Path -LiteralPath $target)) {
+        Remove-Item -Recurse -Force -LiteralPath $target
+    }
+    throw
+}
+
+Write-Host "Setup complete: level=$Level scope=$Scope"
+Write-Host "Rules: $target"
+Write-Host "Codex guidance: $agentsPath"

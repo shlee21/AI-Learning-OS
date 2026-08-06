@@ -27,22 +27,28 @@ powershell -ExecutionPolicy Bypass -File install/setup.ps1
 **1단계 — Core 기본 규칙**
 
 ```text
-https://github.com/shlee21/AI-Learning-OS.git 에서 1단계 설치해줘
+https://github.com/shlee21/AI-Learning-OS.git 에서 1단계 글로벌로 설치해줘
 ```
 
 **2단계 — Core + Learning 코치(추천)**
 
 ```text
-https://github.com/shlee21/AI-Learning-OS.git 에서 2단계 설치해줘
+https://github.com/shlee21/AI-Learning-OS.git 에서 2단계 글로벌로 설치해줘
 ```
 
 **3단계 — Core + Learning + Work 전체 설치**
 
 ```text
-https://github.com/shlee21/AI-Learning-OS.git 에서 3단계 설치해줘
+https://github.com/shlee21/AI-Learning-OS.git 에서 3단계 글로벌로 설치해줘
 ```
 
-Codex에는 설치할 프로젝트 폴더를 먼저 열어둔 상태에서 요청하는 것을 권장합니다. 기존 `.ai-learning-os` 폴더가 있으면 덮어쓰지 말고 먼저 확인하도록 요청하세요.
+글로벌 설치는 모든 Codex 프로젝트에 공통 적용됩니다. 현재 프로젝트에만 적용하려면 다음처럼 범위를 명시하세요.
+
+```text
+https://github.com/shlee21/AI-Learning-OS.git 에서 2단계 현재 프로젝트에 설치해줘
+```
+
+3단계 글로벌 설치에는 재사용 가능한 Project·Workflow·Role 템플릿만 포함됩니다. 실제 프로젝트의 목적, 대상, 결정사항과 Evidence는 각 프로젝트에 별도로 작성합니다. 기존 설치 폴더나 `AGENTS.md`는 자동으로 덮어쓰지 않고 확인·백업하도록 설계되어 있습니다.
 
 설치 메뉴에서 수준을 선택합니다.
 
@@ -74,7 +80,7 @@ Codex에는 설치할 프로젝트 폴더를 먼저 열어둔 상태에서 요�
 
 ## 상태
 
-현재 버전은 `v0.1.0`입니다. 문서 기반 규칙 세트이며 특정 모델이나 서비스에 종속되지 않습니다.
+현재 버전은 `v0.2.0`입니다. 문서 기반 규칙 세트이며 특정 모델이나 서비스에 종속되지 않습니다.
 
 ## License
 
