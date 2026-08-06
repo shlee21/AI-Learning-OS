@@ -20,6 +20,30 @@ cd AI-Learning-OS
 powershell -ExecutionPolicy Bypass -File install/setup.ps1
 ```
 
+### Codex 대화창에서 더 쉽게 설치하기
+
+명령어를 직접 입력하기 어렵다면 Codex 대화창에 아래 문장 중 하나를 그대로 입력하세요. Codex가 저장소를 확인하고 선택한 단계에 맞춰 설치하도록 요청하는 방식입니다.
+
+**1단계 — Core 기본 규칙**
+
+```text
+https://github.com/shlee21/AI-Learning-OS.git 에서 1단계 설치해줘
+```
+
+**2단계 — Core + Learning 코치(추천)**
+
+```text
+https://github.com/shlee21/AI-Learning-OS.git 에서 2단계 설치해줘
+```
+
+**3단계 — Core + Learning + Work 전체 설치**
+
+```text
+https://github.com/shlee21/AI-Learning-OS.git 에서 3단계 설치해줘
+```
+
+Codex에는 설치할 프로젝트 폴더를 먼저 열어둔 상태에서 요청하는 것을 권장합니다. 기존 `.ai-learning-os` 폴더가 있으면 덮어쓰지 말고 먼저 확인하도록 요청하세요.
+
 설치 메뉴에서 수준을 선택합니다.
 
 1. Core — 기본 규칙만
