@@ -8,6 +8,33 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
+# Windows PowerShell 5.1 reads BOM-less UTF-8 as the system ANSI code page when
+# Get-Content is used without an explicit encoding. Use strict UTF-8 decoding
+# and BOM-less UTF-8 output so existing Korean guidance is never rewritten as
+# mojibake.
+$utf8Strict = New-Object System.Text.UTF8Encoding($false, $true)
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+function Read-StrictUtf8File {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    try {
+        return $utf8Strict.GetString([System.IO.File]::ReadAllBytes($Path))
+    }
+    catch {
+        throw "The existing file is not valid UTF-8 and was not changed: $Path"
+    }
+}
+
+function Write-Utf8NoBomFile {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][string]$Content
+    )
+
+    [System.IO.File]::WriteAllText($Path, $Content, $utf8NoBom)
+}
+
 if (-not $Level) {
     Write-Host 'Choose an AI Learning OS setup level.'
     Write-Host '1. Core'
@@ -48,7 +75,7 @@ if (Test-Path -LiteralPath $target) {
 
 $beginMarker = '<!-- AI-LEARNING-OS:BEGIN -->'
 $endMarker = '<!-- AI-LEARNING-OS:END -->'
-$existingAgents = if (Test-Path -LiteralPath $agentsPath) { Get-Content -Raw -LiteralPath $agentsPath } else { '' }
+$existingAgents = if (Test-Path -LiteralPath $agentsPath) { Read-StrictUtf8File -Path $agentsPath } else { '' }
 
 if ($existingAgents -match [regex]::Escape($beginMarker)) {
     throw "AI Learning OS is already linked in $agentsPath. Setup stopped to avoid duplicate instructions."
@@ -119,11 +146,12 @@ try {
         Copy-Item -Recurse -LiteralPath (Join-Path $sourceRoot 'work') -Destination $target
     }
 
-    @(
+    $installInfo = @(
         "level=$Level",
         "scope=$Scope",
         "installed=$(Get-Date -Format o)"
-    ) | Set-Content -LiteralPath (Join-Path $target 'install.info') -Encoding utf8
+    ) -join [Environment]::NewLine
+    Write-Utf8NoBomFile -Path (Join-Path $target 'install.info') -Content ($installInfo + [Environment]::NewLine)
 
     $agentsParent = Split-Path -Parent $agentsPath
     if (-not (Test-Path -LiteralPath $agentsParent)) {
@@ -134,11 +162,11 @@ try {
         $backupPath = "$agentsPath.backup-$timestamp"
         Copy-Item -LiteralPath $agentsPath -Destination $backupPath
         $newAgents = $existingAgents.TrimEnd() + [Environment]::NewLine + [Environment]::NewLine + $instructionBlock + [Environment]::NewLine
-        Set-Content -LiteralPath $agentsPath -Value $newAgents -Encoding utf8
+        Write-Utf8NoBomFile -Path $agentsPath -Content $newAgents
         Write-Host "Existing AGENTS.md backed up to: $backupPath"
     }
     else {
-        Set-Content -LiteralPath $agentsPath -Value ($instructionBlock + [Environment]::NewLine) -Encoding utf8
+        Write-Utf8NoBomFile -Path $agentsPath -Content ($instructionBlock + [Environment]::NewLine)
     }
 }
 catch {

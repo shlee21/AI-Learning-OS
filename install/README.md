@@ -78,6 +78,8 @@ powershell -ExecutionPolicy Bypass -File install/setup.ps1 -Level 3 -Scope Proje
 
 - 설치 대상 폴더가 이미 있으면 덮어쓰지 않고 중단한다.
 - 기존 `AGENTS.md`가 있으면 타임스탬프가 포함된 백업을 만든 뒤 전용 마커 블록을 추가한다.
+- 기존 `AGENTS.md`는 엄격한 UTF-8로 읽고, 한글을 보존하는 BOM 없는 UTF-8로 저장한다.
+- 기존 파일이 유효한 UTF-8이 아니면 파일을 변경하지 않고 설치를 중단한다.
 - AI Learning OS 연결 블록이 이미 있으면 중복 설치를 중단한다.
 - 설치 중 연결에 실패하면 새로 만든 규칙 폴더를 제거해 불완전한 설치를 남기지 않는다.
 
