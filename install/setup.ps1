@@ -39,7 +39,7 @@ if (-not $Level) {
     Write-Host 'Choose an AI Learning OS setup level.'
     Write-Host '1. Core'
     Write-Host '2. Core + Learning (recommended)'
-    Write-Host '3. Full templates'
+    Write-Host '3. Full (Core + Learning + Capabilities + Work)'
     $Level = Read-Host 'Level (1-3)'
     if ($Level -notin @('1', '2', '3')) { throw 'Enter 1, 2, or 3.' }
 }
@@ -125,10 +125,13 @@ if ($Level -in @('2', '3')) {
 if ($Level -eq '3') {
     $lines += @(
         '',
+        'For complex production work, read the Capability index and load only the Pack needed for the current result:',
+        "- ``$referenceRoot/capabilities/README.md``",
+        '',
         'The Work files are reusable templates. Load one only when the current task needs it:',
-        "- ``$referenceRoot/work/project-template.md``",
-        "- ``$referenceRoot/work/workflow-template.md``",
-        "- ``$referenceRoot/work/role-template.md``",
+        "- ``$referenceRoot/work/templates/project-template.md``",
+        "- ``$referenceRoot/work/templates/workflow-template.md``",
+        "- ``$referenceRoot/work/templates/role-template.md``",
         '',
         'Keep real project facts, decisions, constraints, Evidence, and Reference in each project rather than in the global templates.'
     )
@@ -152,6 +155,7 @@ try {
         Copy-Item -Recurse -LiteralPath (Join-Path $sourceRoot 'learning') -Destination $target
     }
     if ($Level -eq '3') {
+        Copy-Item -Recurse -LiteralPath (Join-Path $sourceRoot 'capabilities') -Destination $target
         Copy-Item -Recurse -LiteralPath (Join-Path $sourceRoot 'work') -Destination $target
     }
 

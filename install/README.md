@@ -8,9 +8,9 @@ AI Learning OS는 설치 단계와 적용 범위를 각각 선택한다.
 |---|---|---|
 | 1단계 | Core 규칙 6개 | 기본 협업 원칙만 필요한 사용자 |
 | 2단계 | Core + Learning Coach | 질문·사고·맥락·학습 훈련이 필요한 사용자 |
-| 3단계 | Core + Learning + Work 템플릿 | 프로젝트·워크플로·역할 설계까지 필요한 사용자 |
+| 3단계 | Core + Learning + Capability + Work | 생산 능력을 조합해 프로젝트를 수행하는 사용자 |
 
-3단계를 글로벌로 설치해도 실제 프로젝트의 목적, 대상, 결정사항, 제약은 글로벌에 저장하지 않는다. 글로벌에는 재사용 가능한 Work 템플릿만 두고 프로젝트별 Context는 각 프로젝트에서 작성한다.
+3단계를 글로벌로 설치해도 실제 프로젝트의 목적, 대상, 결정사항, 제약은 글로벌에 저장하지 않는다. 글로벌에는 재사용 가능한 Capability Pack과 Work 템플릿만 두고 프로젝트별 Context는 각 프로젝트에서 작성한다.
 
 ## 설치 범위
 
@@ -89,6 +89,7 @@ powershell -ExecutionPolicy Bypass -File install/setup.ps1 -Level 3 -Scope Proje
 
 - Core: `core/` 복사
 - Learning: `learning/` 추가 복사
-- Work: `work/`의 템플릿 추가 복사
+- Capability: 3단계에서 `capabilities/`의 재사용 Pack 추가 복사
+- Work: 3단계에서 `work/templates/`와 프로젝트·워크플로·역할 공간 추가 복사
 
 파일 복사만으로 끝내지 말고 적용 범위에 맞는 `AGENTS.md`에서 설치 문서를 읽도록 연결해야 한다.

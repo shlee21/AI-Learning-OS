@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 — 2026-08-07
+
+- Core, Learning, Capability, Work의 네 계층 구조 도입
+- 여섯 개 Capability Pack 추가
+- Work를 templates, projects, workflows, roles로 재분류
+- Orchestrator에 Capability 선택 단계 추가
+- 3단계 설치가 Capability Pack과 새 Work 구조를 포함하도록 갱신
+- 복합 답변에서 실제 작동 계층만 보여주는 선택형 OS Trace 추가
+
 ## 0.2.3 — 2026-08-07
 
 - `ALO`를 AI Learning OS의 공식 별칭으로 등록
