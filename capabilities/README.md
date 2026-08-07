@@ -18,3 +18,12 @@ Capability Pack은 결과물 이름이 아니라 결과를 만드는 재사용 �
 3. Evidence 판단 원칙은 Core에, 실제 조사 방법은 Research & Analysis에 둔다.
 4. 여러 프로젝트에서 반복되는 방법만 Capability로 승격한다.
 5. 프로젝트에만 유효한 대상·제약·결정은 Capability에 넣지 않는다.
+
+## 답변에서 표시
+
+복합 작업에서 선택한 Pack을 알려주는 것이 유용하면 `[CAPABILITY · 활용 능력]` 아래에 실제 사용한 Pack만 표시한다. 설치된 Pack 전체나 결과물 이름을 나열하지 않는다.
+
+```text
+[CAPABILITY · 활용 능력]
+Research & Analysis · Technical Writing
+```

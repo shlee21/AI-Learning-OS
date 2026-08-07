@@ -28,6 +28,16 @@ AI Learning OS 전체를 설치하기 전에 **개인 맞춤설정의 효과를 
 
 각 파일은 하나의 책임만 가집니다. `thinking.md`는 항상 적용되는 사고 원칙이고, `thinking-coach.md`는 필요할 때 사용자의 사고를 확장하는 행동 규칙입니다.
 
+## 답변에서 OS 작동 보기
+
+복합 작업에서는 실제로 작동한 계층을 선택형 접두사로 구분합니다.
+
+```text
+[CORE · 판단] → [LEARNING · 학습] → [CAPABILITY · 활용 능력] → [WORK · 실행]
+```
+
+단순 질문에는 표시하지 않으며 네 계층을 모두 강제로 채우지 않습니다. 필요한 계층만 보여주므로 사용자는 적용 원칙, 학습 지점, 활용 능력과 실행 상태를 구분해 이해할 수 있습니다. 자세한 예시는 [전체 구조와 사용법](docs/GUIDE.md)에서 확인할 수 있습니다.
+
 ## 5분 시작
 
 ```powershell
@@ -76,7 +86,9 @@ https://github.com/shlee21/AI-Learning-OS.git 에서 2단계 현재 프로젝트
 
 ## 작동 순서
 
-`Intent → Knowledge(Evidence + Reference) → Context → Reasoning → Response → Learning`
+OS 계층은 `Core → Learning → Capability → Work` 순서로 연결됩니다. 내부 작업 라우팅은 다음 순서를 따릅니다.
+
+`Intent → Knowledge(Evidence + Reference) → Context → Capability → Reasoning → Response → Learning`
 
 - **Evidence**는 사실성과 신뢰성을 정합니다.
 - **Reference**는 결과가 향할 방향과 스타일을 정합니다.

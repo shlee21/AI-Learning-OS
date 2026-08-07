@@ -7,6 +7,7 @@
 - Work를 templates, projects, workflows, roles로 재분류
 - Orchestrator에 Capability 선택 단계 추가
 - 3단계 설치가 Capability Pack과 새 Work 구조를 포함하도록 갱신
+- 복합 답변에서 실제 작동 계층만 보여주는 선택형 OS Trace 추가
 
 ## 0.2.2 — 2026-08-07
 
