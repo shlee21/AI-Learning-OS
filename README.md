@@ -69,6 +69,7 @@ https://github.com/shlee21/AI-Learning-OS.git 에서 2단계 현재 프로젝트
 ## 주요 문서
 
 - [전체 구조와 사용법](docs/GUIDE.md)
+- [개인 맞춤설정·맞춤형 지침 실험 예제](docs/CUSTOM-INSTRUCTIONS-EXAMPLE.md)
 - [설계 철학](PHILOSOPHY.md)
 - [중요 결정](DECISIONS.md)
 - [설치 안내](install/README.md)
@@ -80,7 +81,7 @@ https://github.com/shlee21/AI-Learning-OS.git 에서 2단계 현재 프로젝트
 
 ## 상태
 
-현재 버전은 `v0.2.1`입니다. 문서 기반 규칙 세트이며 특정 모델이나 서비스에 종속되지 않습니다.
+현재 버전은 `v0.2.2`입니다. 문서 기반 규칙 세트이며 특정 모델이나 서비스에 종속되지 않습니다.
 
 ## License
 
