@@ -1,8 +1,8 @@
 # Decisions
 
-## D-001 — 세 계층
+## D-001 — 네 계층
 
-Core OS, Learning OS, Work OS로 구분한다. 처음부터 모든 기능을 강제하지 않는다.
+Core OS, Learning OS, Capability OS, Work OS로 구분한다. 처음부터 모든 기능을 강제하지 않는다.
 
 ## D-002 — Profile Pack을 만들지 않는다
 
@@ -31,3 +31,7 @@ Learning Coach는 Work OS나 Agent가 없어도 사용자가 요청하거나 세
 ## D-008 — HANDOFF 제외
 
 현재 버전에는 HANDOFF/SESSION 문서를 두지 않는다. 프로젝트 상태는 PROJECT, DECISIONS, ROADMAP, CHANGELOG로 관리한다.
+
+## D-009 — 결과물 유형보다 Capability 조합
+
+프로젝트를 보고서·웹·영상처럼 결과물 종류별 Skill로 고정하지 않는다. Software Engineering, Technical Writing, Visual Communication, Research & Analysis, Workflow Automation, Service Design처럼 재사용 가능한 생산 능력을 조합한다. 프로젝트 전용 사실과 결정은 Work의 Project Context에 둔다.

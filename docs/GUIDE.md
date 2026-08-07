@@ -17,14 +17,24 @@ AI Learning OS는 질문을 잘 쓰는 기술을 넘어, 대화를 거듭할수�
 | Learning | thinking-coach | 상황별 사고 확장 |
 | Learning | context-coach | 개념을 관계와 맥락으로 연결 |
 | Learning | learning-coach | 세션에서 얻은 학습을 회고 |
-| Work | templates | 프로젝트·워크플로·역할 확장 |
+| Capability | packs | 결과를 만드는 재사용 가능한 생산 능력 |
+| Work | templates/projects/workflows/roles | 프로젝트 Context와 실행 구조 |
+
+## 네 계층
+
+1. **Core OS** — 항상 적용하는 판단 원칙
+2. **Learning OS** — 필요할 때 사용자의 질문·사고·맥락·학습을 돕는 코칭
+3. **Capability OS** — Software Engineering, Technical Writing, Visual Communication, Research & Analysis, Workflow Automation, Service Design
+4. **Work OS** — 이번 프로젝트의 Context, Workflow, Role과 Capability 조합
+
+Capability는 결과물 이름이 아니다. 보고서 프로젝트도 조사, 기술 문서 작성, 시각 커뮤니케이션을 함께 사용할 수 있다.
 
 ## 추천 수준
 
 - **입문자**: Core + Question Coach
 - **일반 사용자**: Core + Learning 전체
-- **실무자**: Core + Learning + Project Template
-- **고급 사용자**: Full + 필요한 Role/Workflow만 추가
+- **실무자**: Core + Learning + 필요한 Capability + Project Template
+- **고급 사용자**: Full + 필요한 Capability/Role/Workflow만 선택
 
 ## 대화 예시
 
@@ -34,14 +44,16 @@ AI는 목적과 성공 기준 중 결과를 바꿀 누락을 먼저 짚고, Evid
 
 ## 프로젝트에 적용
 
-1. `work/project-template.md`를 프로젝트 폴더에 복사한다.
+1. `work/templates/project-template.md`를 `work/projects/<project-name>/project.md`로 복사한다.
 2. 대상, 제약, 결정사항, 성공 기준을 채운다.
-3. 조직별 호칭이나 표현은 해당 Context에 적는다.
-4. 복합 작업일 때만 Workflow와 Role을 추가한다.
+3. 결과를 만드는 데 필요한 Capability Pack만 선택해 Capability Map에 기록한다.
+4. 조직별 호칭이나 표현은 해당 Context에 적는다.
+5. 복합 작업일 때만 Workflow와 Role을 추가한다.
 
 ## 중복 방지 규칙
 
 - 항상 적용되는 것은 Core에 둔다.
 - 사용자 성장에 상황별로 개입하는 것은 Learning에 둔다.
+- 여러 프로젝트에서 반복되는 생산 방법은 Capability에 둔다.
 - 특정 프로젝트에만 필요한 사실은 Project Context에 둔다.
 - 여러 단계 실행은 Workflow, 전문 책임은 Role에 둔다.

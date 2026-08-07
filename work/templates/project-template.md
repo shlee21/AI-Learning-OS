@@ -12,6 +12,8 @@
 
 ## 성공 기준
 
+## Capability Map
+
 ## Evidence
 
 ## Reference

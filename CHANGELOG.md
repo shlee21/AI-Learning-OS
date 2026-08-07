@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 — 2026-08-07
+
+- Core, Learning, Capability, Work의 네 계층 구조 도입
+- 여섯 개 Capability Pack 추가
+- Work를 templates, projects, workflows, roles로 재분류
+- Orchestrator에 Capability 선택 단계 추가
+- 3단계 설치가 Capability Pack과 새 Work 구조를 포함하도록 갱신
+
 ## 0.2.2 — 2026-08-07
 
 - 개인 맞춤설정·맞춤형 지침의 효과를 비교하는 실험 문서 추가
