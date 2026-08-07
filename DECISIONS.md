@@ -39,3 +39,11 @@ Learning Coach는 Work OS나 Agent가 없어도 사용자가 요청하거나 세
 ## D-010 — 결과물 유형보다 Capability 조합
 
 프로젝트를 보고서·웹·영상처럼 결과물 종류별 Skill로 고정하지 않는다. Software Engineering, Technical Writing, Visual Communication, Research & Analysis, Workflow Automation, Service Design처럼 재사용 가능한 생산 능력을 조합한다. 프로젝트 전용 사실과 결정은 Work의 Project Context에 둔다.
+
+## D-011 — Learning은 전체 작업을 관통한다
+
+Learning을 결과 뒤의 선택형 요약으로 제한하지 않는다. 복합 작업에서는 질문, 중요한 인간 판단, 사이클 종료 시점에 체크포인트를 두어 질문력·사고확장력·암묵지의 명시지화를 결과 생산과 연결한다. 단순 사실 요청에는 이를 강제하지 않는다.
+
+## D-012 — 인간의 판단을 추정하지 않는다
+
+AI가 제안한 판단 기준과 사용자가 확인한 판단 기준을 구분한다. 사용자가 말하지 않은 선택·이유·검수 경험을 지어내지 않으며, 확인된 내용만 재사용 가능한 명시지로 확정한다.

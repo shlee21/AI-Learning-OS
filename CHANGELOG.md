@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0 — 2026-08-07
+
+- Question Coach에 질문 진단·대안 질문·사용자 선택 방식 추가
+- Thinking Coach에 모르는 개념을 판단까지 연결하는 Knowledge Bridge 추가
+- Learning Coach를 인간의 선택·검수 경험을 명시지화하는 구조로 강화
+- Orchestrator에 Question·Human Judgment·Learning Checkpoint 추가
+- Project·Workflow 템플릿에 성장 목표, 인간 판단, 검수, 명시지화 항목 추가
+- 결과와 학습을 연결하는 순환 구조를 README와 GUIDE에 반영
+
 ## 0.3.0 — 2026-08-07
 
 - Core, Learning, Capability, Work의 네 계층 구조 도입
