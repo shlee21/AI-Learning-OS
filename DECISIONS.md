@@ -31,3 +31,7 @@ Learning Coach는 Work OS나 Agent가 없어도 사용자가 요청하거나 세
 ## D-008 — HANDOFF 제외
 
 현재 버전에는 HANDOFF/SESSION 문서를 두지 않는다. 프로젝트 상태는 PROJECT, DECISIONS, ROADMAP, CHANGELOG로 관리한다.
+
+## D-009 — ALO 공식 별칭
+
+`ALO`를 AI Learning OS의 공식 별칭으로 사용한다. GitHub 주소는 최초 설치와 원본 식별에 사용하고, 글로벌 설치 시 `AGENTS.md`에 별칭 관계를 등록한다. 별칭만을 위해 별도의 글로벌 Skill은 만들지 않는다.

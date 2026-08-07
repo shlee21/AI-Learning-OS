@@ -100,6 +100,15 @@ $lines = @(
 )
 $lines += $coreLinks | ForEach-Object { "- ``$_``" }
 
+if ($Scope -eq 'Global') {
+    $lines += @(
+        '',
+        'ALO is the official alias of AI Learning OS.',
+        'Treat `ALO`, `AI Learning OS`, `AI-Learning-OS`, and `https://github.com/shlee21/AI-Learning-OS.git` as the same installed system.',
+        'When the user mentions ALO, interpret the request as referring to this global AI Learning OS installation.'
+    )
+}
+
 if ($Level -in @('2', '3')) {
     $lines += @(
         '',
